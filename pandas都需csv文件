@@ -1,2 +1,0 @@
-header : int or list of ints, default ‘infer’
-指定行数用来作为列名，数据开始行数。如果文件中没有列名，则默认为0，否则设置为None。如果明确设定header=0 就会替换掉原来存在列名。(一般设置为0)
