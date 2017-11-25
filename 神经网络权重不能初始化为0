@@ -1,0 +1,5 @@
+  because if every neuron in the network computes the same output, then they will also all compute the same gradients during backpropagation
+and undergo the exact same parameter updates. In other words, there is no source of asymmetry between neurons if their weights are 
+initialized to be the same. 
+  如果每个权重都一样，那么在多层网络中，从第二层开始，每一层的输入值都是相同的了也就是a1=a2=a3=....，既然都一样，就相当于一个输入了。
+  训练出来的所有权重将会是一样的。
