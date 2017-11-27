@@ -1,2 +1,2 @@
-anchor box的作用是让一个格子（grid）能检查出多个对象。例如：有5个anchor box，则可以检查出5个对象。
-anchor box的编码如下：
+anchor box是在bounding box的基础上建立的，如果没有anchor box， 一个grid只有一个bounding box，而引入anchor box后，一个grid可以有多个anchor box。
+anchor box的作用是让一个格子（grid）能检查出多个对象。例如：有5个anchor box，则可以检查出5个对象。当对象与其中一个anchor box的IoU最大时
