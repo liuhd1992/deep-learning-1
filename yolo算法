@@ -1,1 +1,1 @@
-anchor box的作用是让一个格子（grid）能检查出多个对象。
+anchor box的作用是让一个格子（grid）能检查出多个对象。例如：有5个anchor box，则可以检查出5个对象。
