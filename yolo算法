@@ -2,7 +2,8 @@
 anchor box的作用是让一个格子（grid）能检查出多个对象。例如：有5个anchor box，则可以检查出5个对象。当对象与其中一个anchor box的IoU最大时，则对象与这个
 anchor box匹配。该anchor box的pc为1（pc=1表示该anchor box检测到对象），（bx,by,bh,bw）是对象边框的位置，c是对象的类型。（问题：anchor box的边框位置怎么算？）
   yolo_filter_boxes实现过程：
- 1、 将一个grid的每个anchor box的pc *　ｃ(c是各种类型的概率值)，等于每种类型的scores。
- 2、求出每个anchor box的各个类型的score的最大值，并返回其索引（classes，属于哪一类型）。scores的维数是anchor box的个数。
- 3、创建一个filtering mask，其维数与scores维数一致。当一个anchor box的score大于指定的threshold时，fitering mask值为True，否则为false.
- 4、运用mask到scores（各个类型的得分），boxes（bounding box的坐标），classes。将mask为True的维数保留，而将mask为false的维数舍弃。
+ 1、 将一个grid的每个anchor box的pc *　ｃ(c是各种类型的概率值)，等于每种类型的score。 score的维数是有多少种类型（有多少种类型就有多少种score）。
+ 2、比较anchor box的各个类型的score， 求出其最大值（box_class_scores），并返回其索引（classes，索引就表示其属于哪一类型）。
+ box_class_scores的维数是anchor box的个数。
+ 3、创建一个filtering mask，其维数与box_class_scores维数一致。当一个anchor box的box_class_scores大于指定的threshold时，fitering mask值为True，否则为false.
+ 4、运用mask到box_class_scores（每个anchor box的各个类型的score的最大值），boxes（bounding box的坐标），classes。将mask为True的维数保留，而将mask为false的维数舍弃。
