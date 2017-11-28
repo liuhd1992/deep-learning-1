@@ -1,5 +1,5 @@
   anchor box是在bounding box的基础上建立的，如果没有anchor box， 一个grid只有一个bounding box，而引入anchor box后，一个grid可以有多个anchor box。
-anchor box的作用是让一个格子（grid）能检查出多个对象。例如：有5个anchor box，则可以检查出5个对象。当对象与其中一个anchor box的IoU最大时，则对象与这个
+anchor box的作用是让一个格子（grid）能检查出多个(种)对象。例如：有5个anchor box，则可以检查出5个对象。当对象与其中一个anchor box的IoU最大时，则对象与这个
 anchor box匹配。该anchor box的pc为1（pc=1表示该anchor box检测到对象），（bx,by,bh,bw）是对象边框的位置，c是对象的类型。（问题：anchor box的边框位置怎么算？）
   yolo_filter_boxes实现过程：
  1、 将一个grid的每个anchor box的pc *　ｃ(c是各种类型的概率值)，等于每种类型的score。 score的维数是有多少种类型（有多少种类型就有多少种score）。
