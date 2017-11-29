@@ -11,5 +11,6 @@ anchor box匹配。该anchor box的pc为1（pc=1表示该anchor box检测到对�
   non-max suppression实现过程：
   1、选择得分最高的anchor box。
   2、将其他与该anchor box的iou很高的anchor box舍弃掉。
-  （问题：如果两个anchor box检测到的是两个不同的对象，一个是人，一个是车，如果应用non-max suppression会舍弃一个怎么办？）
+  （问题：如果两个anchor box检测到的是两个不同的对象，一个是人，一个是车，如果应用non-max suppression会舍弃一个怎么办？
+  答案：分别对不同类别的anchor box都做一次non-max suppression）
   
