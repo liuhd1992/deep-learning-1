@@ -8,4 +8,8 @@ anchor box匹配。该anchor box的pc为1（pc=1表示该anchor box检测到对�
  3、创建一个filtering mask，其维数与box_class_scores维数一致。当一个anchor box的box_class_scores大于指定的threshold时，fitering mask值为True，否则为false.
  4、运用mask到box_class_scores，boxes（bounding box的坐标），classes。将mask为True的维数保留，
  而将mask为false的维数舍弃。这样，将不需要的anchor box过滤掉，保留需要的anchor box。
+  non-max suppression实现过程：
+  1、选择得分最高的anchor box。
+  2、将其他与该anchor box的iou很高的anchor box舍弃掉。
+  （问题：如果两个anchor box检测到的是两个不同的对象，一个是人，一个是车，如果应用non-max suppression会舍弃一个怎么办？）
   
