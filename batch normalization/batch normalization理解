@@ -1,0 +1,8 @@
+  Batch Normalization需要训练的参数scale（γ）， shift（β）。
+  Batch normalization 是一种解决深度神经网络层数太多, 而没办法有效前向传递(forward propagate)的问题. 因为每一层的输出值都会有不同的均值(mean)和方差
+(deviation), 所以输出数据的分布也不一样。
+  为了更有效的学习数据, 我们会对数据预处理, 进行normalization 。 而现在请想象, 我们可以把 “每层输出的值” 都看成 “后面一层所接收的数据”. 对每层都进行一
+次normalization 会不会更好呢? 这就是 Batch normalization 方法的由来。
+  如果你是使用 batch 进行每次的更新, 那每个 batch 的 mean/var 都会不同, 所以我们可以使用 moving average 的方法记录并慢慢改进 mean/var 的值. 然后将修
+改提升后的 mean/var 放入 tf.nn.batch_normalization(). 而且在 test 阶段, 我们就可以直接调用最后一次修改的 mean/var 值进行测试, 而不是采用 test 时的
+fc_mean/fc_var.
