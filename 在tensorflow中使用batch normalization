@@ -1,4 +1,4 @@
-
+code1:
 def batch_norm_layer(x, train_phase, scope_bn):
     with tf.variable_scope(scope_bn):
         beta = tf.Variable(tf.constant(0.0, shape=[x.shape[-1]]), name='beta', trainable=True)
@@ -16,7 +16,23 @@ def batch_norm_layer(x, train_phase, scope_bn):
                             lambda: (ema.average(batch_mean), ema.average(batch_var)))
         normed = tf.nn.batch_normalization(x, mean, var, beta, gamma, 1e-3)
     return normed
-    
+ 
+ code2:
+ def batchnorm(Ylogits, is_test, iteration, offset, convolutional=False):
+    exp_moving_avg = tf.train.ExponentialMovingAverage(0.999, iteration) # adding the iteration prevents from averaging across non-existing iterations
+    bnepsilon = 1e-5
+    if convolutional:
+        mean, variance = tf.nn.moments(Ylogits, [0, 1, 2])
+    else:
+        mean, variance = tf.nn.moments(Ylogits, [0])
+    update_moving_averages = exp_moving_avg.apply([mean, variance])
+    m = tf.cond(is_test, lambda: exp_moving_avg.average(mean), lambda: mean)  ##if it is train stage, update m,v .else return the last m,v
+    v = tf.cond(is_test, lambda: exp_moving_avg.average(variance), lambda: variance)
+    Ybn = tf.nn.batch_normalization(Ylogits, m, v, offset, None, bnepsilon)   ##offset is beta
+    return Ybn, update_moving_averages
+
+def no_batchnorm(Ylogits, is_test, iteration, offset, convolutional=False):
+    return Ylogits, tf.no_op()
     
 问题：batch normalization需要训练那些参数？
 
