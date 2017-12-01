@@ -16,3 +16,7 @@ def batch_norm_layer(x, train_phase, scope_bn):
                             lambda: (ema.average(batch_mean), ema.average(batch_var)))
         normed = tf.nn.batch_normalization(x, mean, var, beta, gamma, 1e-3)
     return normed
+    
+    
+问题：batch normalization需要训练那些参数？
+
