@@ -9,4 +9,5 @@ y=tf.constant(5)
 z = tf.multiply(a, b)      
 result = tf.cond(tf.less(x, y), lambda: tf.add(x, z), lambda: tf.square(y))    ##tf.less(x, y) 等价于 x < y   
 with tf.Session() as session:      
-    print(result.eval())  ##如果后面没有eval(),则打印的是一个张量。
+    print(result.eval())  ##如果后面没有eval(),则打印的是一个张量。eval(str)函数将字符串str当成有效的表达式来求值并返回计算结果。
+                          ##所以，结合math当成一个计算器很好用。
