@@ -22,9 +22,9 @@ def batch_norm_layer(x, train_phase, scope_bn):
     exp_moving_avg = tf.train.ExponentialMovingAverage(0.999, iteration) # adding the iteration prevents from averaging across non-existing iterations
     bnepsilon = 1e-5
     if convolutional:
-        mean, variance = tf.nn.moments(Ylogits, [0, 1, 2])
+        mean, variance = tf.nn.moments(Ylogits, [0, 1, 2])   ## 如果是图像数据(进行卷积操作), 可以传入 [0, 1, 2], 相当于求[batch, height, width]
     else:
-        mean, variance = tf.nn.moments(Ylogits, [0])
+        mean, variance = tf.nn.moments(Ylogits, [0])   ## 想要 normalize 的维度, [0] 代表 batch 维度
     update_moving_averages = exp_moving_avg.apply([mean, variance])
     m = tf.cond(is_test, lambda: exp_moving_avg.average(mean), lambda: mean)  ##if it is train stage, update m,v .else return the last m,v
     v = tf.cond(is_test, lambda: exp_moving_avg.average(variance), lambda: variance)
