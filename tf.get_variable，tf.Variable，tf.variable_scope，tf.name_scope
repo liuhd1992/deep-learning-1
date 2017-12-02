@@ -48,3 +48,7 @@ with tf.Session() as sess:
     print(var3_reuse.name)      # a_variable_scope/var3:0
     print(sess.run(var3_reuse)) # [ 3.]
  scope.reuse_variables()会使当tf.get_variable（）方式创建的变量名字相同的，不会创建一个新的变量。
+ 
+ 由于tf.Variable() 每次都在创建新对象，所有reuse=True 和它并没有什么关系。对于get_variable()，来说，如果已经创建的变量对象，就把那个对象返回，
+ 如果没有创建变量对象的话，就创建一个新的。
+ 
