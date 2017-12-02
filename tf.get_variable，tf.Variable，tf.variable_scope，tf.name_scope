@@ -27,9 +27,9 @@ with tf.variable_scope("a_variable_scope") as scope:
     initializer = tf.constant_initializer(value=3)
     var3 = tf.get_variable(name='var3', shape=[1], dtype=tf.float32, initializer=initializer)
     var4 = tf.Variable(name='var4', initial_value=[4], dtype=tf.float32)
-    var4_reuse = tf.Variable(name='var4', initial_value=[4], dtype=tf.float32)
     scope.reuse_variables()
-    var3_reuse = tf.get_variable(name='var3',)
+    var4_reuse = tf.Variable(name='var4', initial_value=[4], dtype=tf.float32)
+    var3_reuse = tf.get_variable(name='var3')
 
 with tf.Session() as sess:
     # tf.initialize_all_variables() no long valid from
@@ -43,7 +43,8 @@ with tf.Session() as sess:
     print(sess.run(var3))       # [ 3.]
     print(var4.name)            # a_variable_scope/var4:0
     print(sess.run(var4))       # [ 4.]
-    print(var4_reuse.name)      # a_variable_scope/var4_1:0  ##对name相同的Variable（）会创建一个新的变量
+    print(var4_reuse.name)      # a_variable_scope/var4_1:0  ##对name相同的tf.Variable（）方式会创建一个新的变量， scope.reuse_variables()对其没有效果
     print(sess.run(var4_reuse)) # [ 4.]
     print(var3_reuse.name)      # a_variable_scope/var3:0
     print(sess.run(var3_reuse)) # [ 3.]
+ scope.reuse_variables()会使当tf.get_variable（）方式创建的变量名字相同的，不会创建一个新的变量。
