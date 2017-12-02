@@ -18,6 +18,10 @@ def batch_norm_layer(x, train_phase, scope_bn):
     return normed
  
  code2:
+ # test flag for batch norm
+ tst = tf.placeholder(tf.bool)
+ iter = tf.placeholder(tf.int32)
+ 
  def batchnorm(Ylogits, is_test, iteration, offset, convolutional=False):
     exp_moving_avg = tf.train.ExponentialMovingAverage(0.999, iteration) # adding the iteration prevents from averaging across non-existing iterations
     bnepsilon = 1e-5
