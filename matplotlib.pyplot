@@ -28,3 +28,65 @@ plt.xlabel('Generation')
 plt.ylabel('Accuracy')
 plt.legend(loc='lower right')
 plt.show()
+
+
+
+
+wanzb
+
+    # Start training loop
+    train_loss = []
+    train_acc = []
+    test_acc = []
+
+    for i in range(generations):
+        rand_index = np.random.choice(len(train_xdata), size=batch_size)
+        rand_x = train_xdata[rand_index]
+        #print rand_x.shape
+        rand_x = np.expand_dims(rand_x, 3)
+        #print rand_x.shape
+        rand_y = train_labels[rand_index]
+        train_dict = {x_input: rand_x, y_target: rand_y, keep_prob : 0.9}
+
+        sess.run(train_step, feed_dict=train_dict)
+        temp_train_loss, temp_train_preds = sess.run([loss, prediction], feed_dict=train_dict)
+        temp_train_acc = get_accuracy(temp_train_preds, rand_y)
+
+        if (i+1) % eval_every == 0:
+            eval_index = np.random.choice(len(test_xdata), size=evaluation_size)
+            eval_x = test_xdata[eval_index]
+            eval_x = np.expand_dims(eval_x, 3)
+            eval_y = test_labels[eval_index]
+            test_dict = {eval_input: eval_x, eval_target: eval_y, keep_prob : 1.0}
+            test_preds = sess.run(test_prediction, feed_dict=test_dict)
+            temp_test_acc = get_accuracy(test_preds, eval_y)
+
+            # Record and print results
+            train_loss.append(temp_train_loss)
+            train_acc.append(temp_train_acc)
+            test_acc.append(temp_test_acc)
+            acc_and_loss = [(i+1), temp_train_loss, temp_train_acc, temp_test_acc]
+            acc_and_loss = [np.round(x,2) for x in acc_and_loss]
+            elapsed_time = time.time() - start_time
+            print(elapsed_time * 1000 / eval_every)
+            start_time = time.time()
+            print('Generation # {}. Train Loss: {:.2f}. Train Acc (Test Acc): {:.2f} ({:.2f})'.format(*acc_and_loss))
+
+    
+# Matlotlib code to plot the loss and accuracies
+eval_indices = range(0, generations, eval_every)
+# Plot loss over time
+plt.plot(eval_indices, train_loss, 'k-')
+plt.title('Softmax Loss per Generation')
+plt.xlabel('Generation')
+plt.ylabel('Softmax Loss')
+plt.show()
+
+# Plot train and test accuracy
+plt.plot(eval_indices, train_acc, 'k-', label='Train Set Accuracy')
+plt.plot(eval_indices, test_acc, 'r--', label='Test Set Accuracy')
+plt.title('Train and Test Accuracy')
+plt.xlabel('Generation')
+plt.ylabel('Accuracy')
+plt.legend(loc='lower right')
+plt.show()
