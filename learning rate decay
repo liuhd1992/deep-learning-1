@@ -1,0 +1,9 @@
+    # Exponential Learning Rate Decay Params
+    learning_rate = 0.1
+    lr_decay = 0.1
+    num_gens_to_wait = 250.
+    
+    generation_num = tf.Variable(0, trainable=False)
+    model_learning_rate = tf.train.exponential_decay(learning_rate, generation_num,
+                                                     num_gens_to_wait, lr_decay, staircase=True)
+    
