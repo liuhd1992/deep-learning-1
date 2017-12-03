@@ -30,6 +30,11 @@ plt.legend(loc='lower right')
 plt.show()
 
 完整版代码：
+    # Create accuracy function
+    def get_accuracy(logits, targets):
+      batch_predictions = np.argmax(logits, axis=1)
+      num_correct = np.sum(np.equal(batch_predictions, targets))
+      return(100. * num_correct/batch_predictions.shape[0])
     # Start training loop
     train_loss = []
     train_acc = []
