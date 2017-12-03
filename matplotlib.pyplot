@@ -12,7 +12,7 @@ for i in range(generation):
     
 
 # Matlotlib code to plot the loss and accuracies
-eval_indices = range(0, 500, eval_every)
+eval_indices = range(0, generation, eval_every)
 # Plot loss over time
 plt.plot(eval_indices, train_loss, 'k-')
 plt.title('Softmax Loss per Generation')
