@@ -14,7 +14,7 @@
     print('Creating the Training Operation.')
     generation_num = tf.Variable(0, trainable=False)
     train_op = train_step(loss, generation_num)
-    
+    参考代码：
     code2:
     # variable learning rate
     lr = tf.placeholder(tf.float32)
@@ -27,5 +27,5 @@
     
     # training step, the learning rate is a placeholder
     train_step = tf.train.AdamOptimizer(lr).minimize(cross_entropy)
-    
+    参考代码：
 
