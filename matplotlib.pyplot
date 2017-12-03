@@ -86,4 +86,4 @@ plt.xlabel('Generation')
 plt.ylabel('Accuracy')
 plt.legend(loc='lower right')
 plt.show()
-参考代码：
+参考代码：02_introductory_cnn.py
