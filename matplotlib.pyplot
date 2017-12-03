@@ -29,11 +29,7 @@ plt.ylabel('Accuracy')
 plt.legend(loc='lower right')
 plt.show()
 
-
-
-
-wanzb
-
+完整版代码：
     # Start training loop
     train_loss = []
     train_acc = []
@@ -52,7 +48,7 @@ wanzb
         temp_train_loss, temp_train_preds = sess.run([loss, prediction], feed_dict=train_dict)
         temp_train_acc = get_accuracy(temp_train_preds, rand_y)
 
-        if (i+1) % eval_every == 0:
+        if (i+1) % eval_every == 0:    ##将训练和评估放在同一个i（代）中，保证了train_acc和test_acc索引一致。
             eval_index = np.random.choice(len(test_xdata), size=evaluation_size)
             eval_x = test_xdata[eval_index]
             eval_x = np.expand_dims(eval_x, 3)
@@ -90,3 +86,4 @@ plt.xlabel('Generation')
 plt.ylabel('Accuracy')
 plt.legend(loc='lower right')
 plt.show()
+参考代码：
