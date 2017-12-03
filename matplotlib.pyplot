@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+
+train_loss = []
+train_acc = []
+for i in range(generation):
+  temp_train_loss, temp_train_preds = sess.run([cross_entropy , correct_prediction], feed_dict=train_dict)
+  temp_train_acc = sess.run(accuracy, feed_dict=train_dict)
+  if((i+1) % 10 == 0):
+    train_loss.append(temp_train_loss)
+    train_acc.append(temp_train_acc * 100)
+    
+    
+
+# Matlotlib code to plot the loss and accuracies
+eval_indices = range(0, 500, 10)
+# Plot loss over time
+plt.plot(eval_indices, train_loss, 'k-')
+plt.title('Softmax Loss per Generation')
+plt.xlabel('Generation')
+plt.ylabel('Softmax Loss')
+plt.show()       
+
+# Plot train and test accuracy
+plt.ylim(0, 100)
+plt.plot(eval_indices, train_acc, 'k-', label='Train Set Accuracy')
+plt.title('Train and Test Accuracy')
+plt.xlabel('Generation')
+plt.ylabel('Accuracy')
+plt.legend(loc='lower right')
+plt.show()
