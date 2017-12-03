@@ -4,17 +4,22 @@
     lr_decay = 0.1
     num_gens_to_wait = 250.
 
-    # Our learning rate is an exponential decay after we wait a fair number of generations
-    model_learning_rate = tf.train.exponential_decay(learning_rate, generation_num,
-                                                     num_gens_to_wait, lr_decay, staircase=True)
-    # Create optimizer
-    my_optimizer = tf.train.GradientDescentOptimizer(model_learning_rate)
+    # Train step
+    def train_step(loss_value, generation_num):
+        # Our learning rate is an exponential decay after we wait a fair number of generations
+        model_learning_rate = tf.train.exponential_decay(learning_rate, generation_num,
+                                                         num_gens_to_wait, lr_decay, staircase=True)
+        # Create optimizer
+        my_optimizer = tf.train.GradientDescentOptimizer(model_learning_rate)
+        # Initialize train step
+        train_step = my_optimizer.minimize(loss_value)
+        return(train_step)
     
     # Create training operations
     print('Creating the Training Operation.')
     generation_num = tf.Variable(0, trainable=False)
     train_op = train_step(loss, generation_num)
-    参考代码：
+    参考代码：03_cnn_cifar10.py
     code2:
     # variable learning rate
     lr = tf.placeholder(tf.float32)
@@ -27,5 +32,5 @@
     
     # training step, the learning rate is a placeholder
     train_step = tf.train.AdamOptimizer(lr).minimize(cross_entropy)
-    参考代码：
+    参考代码：mnist_4.2_batchnorm_convolutional.py
 
