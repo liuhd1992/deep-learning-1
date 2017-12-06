@@ -1,10 +1,11 @@
 # Download or open data
 data_dir = 'temp'
 data_file = 'text_data.txt'
-if not os.path.exists(data_dir):
+##如果temp文件夹不存在，则创建temp文件夹
+if not os.path.exists(data_dir): 
     os.makedirs(data_dir)
-
-if not os.path.isfile(os.path.join(data_dir, data_file)):
+##如果文件不存在，下载文件
+if not os.path.isfile(os.path.join(data_dir, data_file)):  
     zip_url = 'http://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip'
     r = requests.get(zip_url)
     z = ZipFile(io.BytesIO(r.content))
@@ -14,7 +15,7 @@ if not os.path.isfile(os.path.join(data_dir, data_file)):
     text_data = text_data.encode('ascii',errors='ignore')
     text_data = text_data.decode().split('\n')
 
-    # Save data to text file
+    # Save data to text file （此时才写入硬盘）
     with open(os.path.join(data_dir, data_file), 'w') as file_conn:
         for text in text_data:
             file_conn.write("{}\n".format(text))
