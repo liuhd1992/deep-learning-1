@@ -1,0 +1,20 @@
+函数：tf.contrib.learn.preprocessing.VocabularyProcessor (max_document_length, min_frequency=0, vocabulary=None, tokenizer_fn=None)
+该函数将文本转换成索引列表
+max_document_length: 文档的最大长度。如果文本的长度大于最大长度，那么它会被剪切，反之则用0填充。 
+min_frequency: 词频的最小值，出现次数小于最小词频则不会被收录到词表中。 
+vocabulary: CategoricalVocabulary 对象。 
+tokenizer_fn：分词函数
+栗子：
+  from tensorflow.contrib import learn
+  import numpy as np
+  max_document_length = 4
+  x_text =[
+      'i love you',
+      'me too'
+  ]
+  vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
+  x = np.array(list(vocab_processor.fit_transform(x_text)))
+  print(x)
+##因为max_document_length为4，所以长度不足4的要用0来补齐
+  [[1 2 3 0]
+   [4 5 0 0]]
