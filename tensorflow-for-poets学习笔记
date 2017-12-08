@@ -1,2 +1,11 @@
-This script downloads the pre-trained model, adds a new final layer, and trains that layer on the flower photos you've downloaded. 
+  This script downloads the pre-trained model, adds a new final layer, and trains that layer on the flower photos you've downloaded. 
 这个脚本（retrain.py）下载这个预训练模型，添加一个新的最后层，并用下载的花照片训练这一层
+  add_final_training_ops.
+  Adds a new softmax and fully-connected layer for training.
+  We need to retrain the top layer to identify our new classes, so this function
+  adds the right operations to the graph, along with some variables to hold the
+  weights, and then sets up all the gradients for the backward pass.
+  The set up for the softmax and fully-connected layers is based on:
+  https://www.tensorflow.org/versions/master/tutorials/mnist/beginners/index.html
+  添加一个新的softmax 和全连接层。我们需要再训练顶层来识别我们的新类别，因此该函数添加相应的operation到graph中，伴随着一些variables来支持weights，
+  接着，为反响传播建立所有的梯度。
