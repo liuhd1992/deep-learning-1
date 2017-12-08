@@ -1,0 +1,2 @@
+This script downloads the pre-trained model, adds a new final layer, and trains that layer on the flower photos you've downloaded. 
+这个脚本（retrain.py）下载这个预训练模型，添加一个新的最后层，并用下载的花照片训练这一层
