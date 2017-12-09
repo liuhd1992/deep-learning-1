@@ -20,6 +20,25 @@
     generation_num = tf.Variable(0, trainable=False)
     train_op = train_step(loss, generation_num)
     参考代码：03_cnn_cifar10.py
+    
+    code1改进版：
+    # Exponential Learning Rate Decay Params
+    learning_rate = 0.1
+    lr_decay = 0.1
+    num_gens_to_wait = 250.
+    
+    generation_num = tf.Variable(0, trainable=False)
+    # Our learning rate is an exponential decay after we wait a fair number of generations
+    model_learning_rate = tf.train.exponential_decay(learning_rate, generation_num,
+                                                     num_gens_to_wait, lr_decay, staircase=True)
+
+    # define optimizer (1 line)
+    optimizer = tf.train.AdamOptimizer(model_learning_rate)
+
+    # define train_step (1 line)
+    train_step = optimizer.minimize(J, global_step = generation_num)   
+    
+    
     code2:
     # variable learning rate
     lr = tf.placeholder(tf.float32)
