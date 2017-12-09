@@ -37,7 +37,7 @@
 
     # define train_step (1 line)
     train_step = optimizer.minimize(J, global_step = generation_num)   
-    
+    参考：tensorflow英文官方网站
     
     code2:
     # variable learning rate
