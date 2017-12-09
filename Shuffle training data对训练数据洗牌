@@ -1,0 +1,20 @@
+
+code:
+##每一代遍历一次整个训练集
+for epoch in range(epochs):
+
+    # Shuffle training data （是对整个训练集数据洗牌）
+    shuffled_ix = np.random.permutation(np.arange(len(x_train)))
+    x_train = x_train[shuffled_ix]
+    y_train = y_train[shuffled_ix]
+    ##对于最后一个batch的大小达不到batch_size,但是也是一个batch，所以加1
+    num_batches = int(len(x_train)/batch_size) + 1
+    # TO DO CALCULATE GENERATIONS ExACTLY
+    for i in range(num_batches):
+        # Select train data
+        min_ix = i * batch_size  
+        ##最后一个batch的下标范围是：(i+1) * batch_size～len(x_train)
+        ##不是最后一个batch的下标范围是：i * batch_size ～(i+1) * batch_size
+        max_ix = np.min([len(x_train), ((i+1) * batch_size)])
+        x_train_batch = x_train[min_ix:max_ix]
+        y_train_batch = y_train[min_ix:max_ix]

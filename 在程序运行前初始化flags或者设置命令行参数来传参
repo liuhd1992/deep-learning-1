@@ -1,0 +1,37 @@
+import tensorflow as tf
+flags = tf.flags #flags是一个文件：flags.py，用于处理命令行参数的解析工作
+logging = tf.logging
+
+#调用flags内部的DEFINE_string函数来制定解析规则
+flags.DEFINE_string("para_name_1","default_val", "description")
+flags.DEFINE_bool("para_name_2","default_val", "description")
+
+#FLAGS是一个对象，保存了解析后的命令行参数
+FLAGS = flags.FLAGS
+
+def main(_):
+    print(FLAGS.para_name_1) #调用命令行输入的参数
+
+if __name__ == "__main__": #使用这种方式保证了，如果此文件被其它文件import的时候，不会执行main中的代码
+
+    tf.app.run() #解析命令行参数，调用main函数 main(sys.argv)
+    
+    
+code2:
+import tensorflow as tf
+flags = tf.app.flags  
+FLAGS = flags.FLAGS  
+flags.DEFINE_float('learning_rate', 0.01, 'Initial learning rate.')  
+flags.DEFINE_integer('epoch_number', None, 'Number of epochs to run trainer.')  
+flags.DEFINE_integer("thread_number", 10 , "Number of thread to read data")  
+flags.DEFINE_string("mode", "train", "Option mode: train, train_from_scratch, inference") 
+
+#FLAGS是一个对象，保存了解析后的命令行参数
+FLAGS = flags.FLAGS
+
+def main(_):
+    print(FLAGS.learning_rate) #调用命令行输入的参数
+
+if __name__ == "__main__": #使用这种方式保证了，如果此文件被其它文件import的时候，不会执行main中的代码
+
+    tf.app.run() #解析命令行参数，调用main函数 main(sys.argv)
