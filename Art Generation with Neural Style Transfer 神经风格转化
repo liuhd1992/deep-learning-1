@@ -1,0 +1,11 @@
+  The model is stored in a python dictionary where each variable name is the key and the corresponding value is a tensor containing 
+that variable's value. To run an image through this network, you just have to feed the image to the model. In TensorFlow, you can 
+do so using the tf.assign function. In particular, you will use the assign function like this:
+  model["input"].assign(image)
+  This assigns the image as an input to the model. After this, if you want to access the activations of a particular layer, say 
+layer 4_2 when the network is run on this image, you would run a TensorFlow session on the correct tensor conv4_2, as follows:
+  sess.run(model["conv4_2"])
+  模型存储在一个python字典中。只需要将图片喂给模型就可以通过模型中运行该图片。分派图片作为模型输入。然后，如果想要访问特定一层的激活值，例如当网络运行在
+  图片时的4_2层，可以使用：
+    sess.run(model["conv4_2"])
+
