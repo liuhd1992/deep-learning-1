@@ -1,0 +1,10 @@
+To clone the latest TensorFlow repository, issue the following command:
+
+$ git clone https://github.com/tensorflow/tensorflow 
+The preceding git clone command creates a subdirectory named tensorflow. After cloning, you may optionally build a specific branch (such as a release branch) by invoking the following commands:
+
+$ cd tensorflow
+$ git checkout Branch # where Branch is the desired branch
+For example, to work with the r1.0 release instead of the master release, issue the following command:
+
+$ git checkout r1.0
