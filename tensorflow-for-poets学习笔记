@@ -9,3 +9,21 @@
   https://www.tensorflow.org/versions/master/tutorials/mnist/beginners/index.html
   添加一个新的softmax 和全连接层。我们需要再训练顶层来识别我们的新类别，因此该函数添加相应的operation到graph中，伴随着一些variables来支持weights，
   接着，为反响传播建立所有的梯度。
+
+
+
+
+问题1：KeyError: "The name 'import/input' refers to an Operation not in the graph."
+解决方案：
+# Line 78
+input_layer = "input"
+# Change to this
+input_layer = "Mul"
+
+问题2：ValueError: Cannot feed value of shape (1, 224, 224, 3) for Tensor 'import/Mul:0', which has shape '(1, 299, 299, 3)'
+解决方案：在Using the Retrained Model阶段，使用训练后的模型时，如果模型使用的是Inception_v3模型，需要修改label_image.py文件。将
+input_height=224
+input_width=224
+改为：
+input_height=299
+input_width=299
