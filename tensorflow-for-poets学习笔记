@@ -27,3 +27,7 @@ input_width=224
 改为：
 input_height=299
 input_width=299
+
+问题3：
+tensorflow.python.framework.errors_impl.NotFoundError: tf_files/models/classify_image_graph_def.pb; No such file or directory
+将原来的inception_v3模型压缩包解压出来的classify_image_graph_def.pb文件拷贝过去
