@@ -1,0 +1,22 @@
+  在图被“投放”进一个Session中后，Tensor的值能够通过把Tensor传到Seesion.run（）这个函数里面去得到结果。相同的，也可以用t.eval（）这个函数，其中的t
+就是你的tensor啦，这个函数可以算是tf.get_default_session().run(t)的简便写法。
+  eval(session=None)
+  作用：
+  在一个session里面，计算并且返回这个变量的值。这个不算是构造图的方法，它并不会添加一个操作到图里面。这个便捷方法需要一个包含这个变量的图投放到了一个
+session里面。要是没有sesssion，那么默认的就会使用默认的session。
+  参数：
+  session: 估算这个变量的Session
+  代码：
+  v = tf.Variable([1, 2])
+  init = tf.global_variables_initializer()
+
+with tf.Session() as sess:
+    sess.run(init)
+    # Usage passing the session explicitly.
+    print(v.eval(sess))
+    # Usage with the default session.  The 'with' block
+    # above makes 'sess' the default session.
+    print(v.eval())
+    结果：
+    [1 2]
+    [1 2]
