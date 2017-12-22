@@ -14,3 +14,13 @@ import moviepy.editor as mpy
 AttributeError: module 'tensorflow.python.training.training' has no attribute 'SummaryWriter'
 解决方法：
 tf.train.SummaryWriter is deprecated, instead use tf.summary.FileWriter.
+
+错误3：
+ValueError: Only call `sigmoid_cross_entropy_with_logits` with named arguments (labels=..., logits=..., ...)
+
+
+错误4：
+AttributeError: module 'tensorflow' has no attribute 'tf.merge_all_summaries'
+
+解决方法：
+将tf.merge_all_summaries替换成tf.summary.merge_all
