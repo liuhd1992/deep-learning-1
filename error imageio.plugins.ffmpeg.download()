@@ -23,4 +23,4 @@ ValueError: Only call `sigmoid_cross_entropy_with_logits` with named arguments (
 AttributeError: module 'tensorflow' has no attribute 'tf.merge_all_summaries'
 
 解决方法：
-将tf.merge_all_summaries替换成tf.summary.merge_all
+将tf.merge_all_summaries()替换成tf.summary.merge_all()
