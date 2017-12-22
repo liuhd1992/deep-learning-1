@@ -9,3 +9,8 @@ import imageio
 imageio.plugins.ffmpeg.download()
 
 import moviepy.editor as mpy
+
+错误2：
+AttributeError: module 'tensorflow.python.training.training' has no attribute 'SummaryWriter'
+解决方法：
+tf.train.SummaryWriter is deprecated, instead use tf.summary.FileWriter.
