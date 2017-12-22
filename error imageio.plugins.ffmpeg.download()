@@ -42,3 +42,7 @@ NameError: name 'reload' is not defined
 Python3异常-AttributeError: module 'sys' has no attribute 'setdefaultencoding'
 解决方法：
 Python3字符串默认编码unicode, 所以sys.setdefaultencoding也不存在了。去掉，sys.setdefaultencoding
+
+问题8：
+激活函数用的sigmoid，平方差函数在更新时候非常慢，交叉熵能避免这个问题。
+解答：
