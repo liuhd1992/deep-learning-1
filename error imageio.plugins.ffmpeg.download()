@@ -1,0 +1,11 @@
+错误：
+imageio.core.fetching.NeedDownloadError: Need ffmpeg exe. You can download it by calling:
+  imageio.plugins.ffmpeg.download()
+解决方法：
+该问题 Need ffmpeg exe. You can download it by calling: imageio.plugins.ffmpeg.download()往往出现在在调用 import moviepy.editor as mpy 时，
+此时不仿根据错误提示，在调用 moviepy 库之前，增加如下语句：
+
+import imageio
+imageio.plugins.ffmpeg.download()
+
+import moviepy.editor as mpy
