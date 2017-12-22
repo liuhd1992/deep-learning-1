@@ -37,3 +37,8 @@ NameError: name 'reload' is not defined
 对于 >= Python 3.4：
   import importlib
   importlib.reload(sys)
+
+错误7：
+Python3异常-AttributeError: module 'sys' has no attribute 'setdefaultencoding'
+解决方法：
+Python3字符串默认编码unicode, 所以sys.setdefaultencoding也不存在了。去掉，sys.setdefaultencoding
