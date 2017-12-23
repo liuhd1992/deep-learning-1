@@ -1,0 +1,48 @@
+错误：
+imageio.core.fetching.NeedDownloadError: Need ffmpeg exe. You can download it by calling:
+  imageio.plugins.ffmpeg.download()
+解决方法：
+该问题 Need ffmpeg exe. You can download it by calling: imageio.plugins.ffmpeg.download()往往出现在在调用 import moviepy.editor as mpy 时，
+此时不仿根据错误提示，在调用 moviepy 库之前，增加如下语句：
+
+import imageio
+imageio.plugins.ffmpeg.download()
+
+import moviepy.editor as mpy
+
+错误2：
+AttributeError: module 'tensorflow.python.training.training' has no attribute 'SummaryWriter'
+解决方法：
+tf.train.SummaryWriter is deprecated, instead use tf.summary.FileWriter.
+
+错误3：
+ValueError: Only call `sigmoid_cross_entropy_with_logits` with named arguments (labels=..., logits=..., ...)
+
+
+错误4：
+AttributeError: module 'tensorflow' has no attribute 'tf.merge_all_summaries'
+
+解决方法：
+将tf.merge_all_summaries()替换成tf.summary.merge_all()
+
+错误5：
+TypeError: Expected int32, got list containing Tensors of type '_Message' instead.
+解决方法：
+tf.concat has changed the order of parameters. You can check the doc to see the difference.
+例如：image   = tf.concat(2, [nearest, bicubic, clipped, label]) 将2和后面的列表位置交换
+
+错误6：
+NameError: name 'reload' is not defined
+解决方法：
+对于 >= Python 3.4：
+  import importlib
+  importlib.reload(sys)
+
+错误7：
+Python3异常-AttributeError: module 'sys' has no attribute 'setdefaultencoding'
+解决方法：
+Python3字符串默认编码unicode, 所以sys.setdefaultencoding也不存在了。去掉，sys.setdefaultencoding
+
+问题8：
+激活函数用的sigmoid，平方差函数在更新时候非常慢，交叉熵能避免这个问题。
+解答：
