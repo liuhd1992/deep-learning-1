@@ -30,3 +30,11 @@ print(img.shape)
 (28, 28, 1)
 img是其中的一张图片
 
+x = mnist.test.images
+y = mnist.test.labels
+print(x.shape)
+print(y.shape)
+结果：
+(10000, 784)
+(10000, 10)
+测试样本是10000张图片
