@@ -29,7 +29,9 @@ with tf.Session() as sess:
             if (i + 1) % checkpoint_steps == 0:  
                 saver.save(sess, checkpoint_dir +'/model.ckpt', global_step=i+1)  
     else:  
+        #checkpoint文件会记录保存信息，通过它可以定位最新保存的模型：
         ckpt = tf.train.get_checkpoint_state(checkpoint_dir)  
+        print(ckpt.model_checkpoint_path) ##-->./checkpoint/model.ckpt-100
         if ckpt and ckpt.model_checkpoint_path:  
             saver.restore(sess, ckpt.model_checkpoint_path)  
         else:  
