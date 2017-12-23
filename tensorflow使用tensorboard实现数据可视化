@@ -59,6 +59,6 @@ for i in range(1000):
     summary_writer.add_summary(summary_str, i);
 
     if i % 50 == 0:
-        print "Setp: ", i, "Accuracy: ",sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels})
+        print("Setp: ", i, "Accuracy: ",sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
 
 print(accuracy.eval(session=sess,feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
