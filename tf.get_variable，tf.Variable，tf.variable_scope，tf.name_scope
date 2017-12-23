@@ -51,4 +51,5 @@ with tf.Session() as sess:
  
  由于tf.Variable() 每次都在创建新对象，所有reuse=True 和它并没有什么关系。对于get_variable()，来说，如果已经创建的变量对象，就把那个对象返回，
  如果没有创建变量对象的话，就创建一个新的。
+ variable_scope 可以通过设置reuse 标志以及初始化方式来影响域下的变量。
  
