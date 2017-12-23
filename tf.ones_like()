@@ -5,3 +5,13 @@ tf.ones_like(tensor, dtype=None, name=None)
   该方法实际上为一个拷贝函数：默认情况下，它会拷贝参数tensor的类型，维度等数据，并将其中的值设置为1．当参数dtype设置后，那么拷贝后的tensor对象
 栗子：
 
+import tensorflow as tf
+
+original = [1,2,3,4,5]
+data = tf.ones_like(original)
+init = tf.global_variables_initializer()
+with tf.Session() as sess:
+    sess.run(init)
+    print(data.eval())
+结果：
+[1 1 1 1 1]
