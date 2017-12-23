@@ -18,3 +18,5 @@ with tf.Session() as sess:
   # Check the values of the variables
   print("v1 : %s" % v1.eval())
   print("v2 : %s" % v2.eval())
+#模型的恢复用的是restore()函数，它需要两个参数restore(sess, save_path)，save_path指的是保存的模型路径。我们可以使用tf.train.latest_checkpoint()
+#来自动获取最后一次保存的模型。
