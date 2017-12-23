@@ -8,3 +8,7 @@ merge合并操作
   summary_str = sess.run(merged_summary_op,feed_dict={x: batch[0], y_: batch[1]});
     summary_writer.add_summary(summary_str, i);
     
+打开tensorboard
+  在终端下运行
+  tensorboard --logdir='/tmp/mnist_logs'//目录是我在创建writer的时候设定的.
+  然后打开浏览器运行地址:0.0.0.0:6006
