@@ -46,3 +46,8 @@ Python3字符串默认编码unicode, 所以sys.setdefaultencoding也不存在了
 问题8：
 激活函数用的sigmoid，平方差函数在更新时候非常慢，交叉熵能避免这个问题。
 解答：
+
+错误9：
+NameError: name 'file' is not defined
+解决方法：
+file()改为open()
