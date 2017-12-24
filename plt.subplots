@@ -1,1 +1,27 @@
 fig, axes = plt.subplots(nrows, nclos, sharex, sharey)  #创建图像，指定行、列、共享x轴刻度、共享y轴刻度
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 分成2X3，占用第一个，即第一行第一列的子图
+plt.subplot(231)
+# 分成2X3，占用第二个，即第一行第二列的子图
+plt.subplot(232)
+# 分成2X3，占用第三个，即第一行第三列的子图
+plt.subplot(233)
+# 分成2X3，占用第四个，即第二行第一列的子图
+plt.subplot(234)
+
+plt.show()
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+# 分成2x2，占用第一个，即第一行第一列的子图
+plt.subplot(221)
+# 分成2x2，占用第二个，即第一行第二列的子图
+plt.subplot(222)
+# 分成2x1，占用第二个，即第二行
+plt.subplot(212)
+plt.show()
