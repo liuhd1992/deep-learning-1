@@ -1,0 +1,1 @@
+fig, axes = plt.subplots(nrows, nclos, sharex, sharey)  #创建图像，指定行、列、共享x轴刻度、共享y轴刻度
