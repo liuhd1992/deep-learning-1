@@ -1,0 +1,48 @@
+  持久性就是指保持对象，甚至在多次执行同一程序之间也保持对象。通过本文，您会对 Python对象的各种持久性机制（从关系数据库到 Python 的 pickle以及其它机制）
+有一个总体认识。另外，还会让您更深一步地了解Python 的对象序列化能力。
+  将对象存储在磁盘上，便于以后检索。这就是持久性。
+  例如，可以将对象数据存储在某种格式的文本文件中，譬如 CSV 文件。或者可以用关系数据库，譬如 Gadfly、MySQL、PostgreSQL 或者 DB2。
+  在 Python 中，对象序列化过程称为 pickle。可以将对象 pickle 成字符串、磁盘上的文件或者任何类似于文件的对象，也可以将这些字符串、文件或任何类似于文件的
+对象 unpickle 成原来的对象。
+  dump(object, file) 将对象写到文件，这个文件可以是实际的物理文件，但也可以是任何类似于文件的对象，这个对象具有 write() 方法，可以接受单个的字符串参数； 
+  load(file) 返回包含在 pickle 文件中的对象。
+代码：
+import pickle
+a1 = 'apple'
+b1 = {1: 'One', 2: 'Two', 3: 'Three'}
+c1 = ['fee', 'fie', 'foe', 'fum']
+with open('emp.pkl', 'wb') as f:
+    pickle.dump(a1, f, True)  
+    pickle.dump(b1, f, True) 
+    pickle.dump(c1, f, True)
+with open('emp.pkl', 'rb') as f:
+    a2 = pickle.load(f)
+    b2 = pickle.load(f)
+    c2 = pickle.load(f)
+print(a2)
+print(b2)
+print(c2)
+结果：
+apple
+{1: 'One', 2: 'Two', 3: 'Three'}
+['fee', 'fie', 'foe', 'fum']
+
+代码等价代码：
+a1 = 'apple'  
+b1 = {1: 'One', 2: 'Two', 3: 'Three'}  
+c1 = ['fee', 'fie', 'foe', 'fum']  
+f1 = open('temp.pkl', 'wb')  
+pickle.dump(a1, f1, True)  
+pickle.dump(b1, f1, True)  
+pickle.dump(c1, f1, True)  
+f1.close()  
+f2 = open('temp.pkl', 'rb')  
+a2 = pickle.load(f2)    
+b2 = pickle.load(f2)  
+c2 = pickle.load(f2)   
+#f2.close() 
+print(a2)
+print(b2)
+print(c2)
+注意：用于写的文件对象f1需要close。如果不close会报错（EOFError: Ran out of input）。用于读的文件对象f2不close不会报错
+  

@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data as mnist_data
-
+#reshape=False图片是28X28维的。如果不带这个参数，图片是784维的
 mnist = mnist_data.read_data_sets("data", one_hot=True, reshape=False, validation_size=0)
 batch_size = 2
 a = mnist.train.next_batch(batch_size)
@@ -11,3 +11,32 @@ result:
 (2, 10)
 (2, 28, 28, 1)
 mnist数据集是一个元组，可以通过下标0来取出图片数据，维数是（batch_size, 28, 28, 1）,通过下标1来取出标签数据，维数是（batch_size, 10）
+
+b = mnist.train.num_examples
+print(b)
+结果：
+60000
+mnist.train.num_examples返回训练样本的数量
+
+imgs = mnist.train.images
+print(imgs.shape)
+结果：
+(60000, 28, 28, 1)
+mnist.train.images返回一个包含所有训练图片像素值的矩阵
+
+img = mnist.train.images[50]
+print(img.shape)
+结果：
+(28, 28, 1)
+img是其中的一张图片
+
+x = mnist.test.images
+y = mnist.test.labels
+print(x.shape)
+print(y.shape)
+结果：
+(10000, 28, 28, 1)
+(10000, 10)
+测试样本是10000张图片
+
+MNIST数据集的像素区间为[0, 1],

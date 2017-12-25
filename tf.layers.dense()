@@ -1,0 +1,27 @@
+dense(
+    inputs,
+    units,
+    activation=None,
+    use_bias=True,
+    kernel_initializer=None,
+    bias_initializer=tf.zeros_initializer(),
+    kernel_regularizer=None,
+    bias_regularizer=None,
+    activity_regularizer=None,
+    trainable=True,
+    name=None,
+    reuse=None
+)
+
+inputs: 输入数据
+units: 该层的神经单元结点数。
+
+栗子：
+import tensorflow as tf
+batch_size = 5
+ones = tf.ones([batch_size,20])
+logits = tf.layers.dense(ones,10)
+print(logits.get_shape())
+结果：
+(5, 10)
+模型参数是（20， 10）维的，是由输入层单元个数和该全连接神经元个数组成的。
