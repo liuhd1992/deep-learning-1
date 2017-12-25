@@ -1,0 +1,2 @@
+scipy.misc.imsave('./figs/cat_tinted.jpg', I_tinted)
+该函数第一个参数是图片的存储路径及名称， 第一个参数是图片数据
