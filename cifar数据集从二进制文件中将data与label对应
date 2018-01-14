@@ -1,0 +1,26 @@
+import pickle
+
+
+# 加载数据
+def load_cfar10_batch(cifar10_dataset_folder_path, batch_id):
+    """
+    加载单批量的数据
+    
+    参数：
+    cifar10_dataset_folder_path: 数据存储目录
+    batch_id: 指定batch的编号
+    """
+    with open(cifar10_dataset_folder_path + '/data_batch_' + str(batch_id), mode='rb') as file:
+        batch = pickle.load(file, encoding='latin1')
+    
+    # features and labels
+    features = batch['data'].reshape((len(batch['data']), 3, 32, 32)).transpose(0, 2, 3, 1)
+    labels = batch['labels']
+
+    return features, labels
+
+# 共有5个batch的训练数据
+features, labels = load_cfar10_batch(cifar10_path, 1)
+for i in range(2, 6):
+    features_temp, labels_temp = load_cfar10_batch(cifar10_path, i)
+    features, labels = np.concatenate([features, features_temp]), np.concatenate([labels, labels_temp])
