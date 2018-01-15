@@ -1,0 +1,11 @@
+错误：
+ERROR:tensorflow:Exception in QueueRunner: Enqueue operation was cancelled
+tensorflow.python.framework.errors_impl.CancelledError: Enqueue operation was cancelled
+tensorflow.python.framework.errors_impl.CancelledError: Session has been closed.
+等
+解决方法：
+coord = tf.train.Coordinator()
+threads = tf.train.start_queue_runners(sess=sess, coord=coord)
+<do stuff>
+coord.request_stop()
+coord.join(threads)
