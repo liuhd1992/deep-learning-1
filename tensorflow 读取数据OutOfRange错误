@@ -1,0 +1,7 @@
+在队列线程（做入队操作的线程）关闭后,再执行出队操作（队列中数据读完了）,将会报错”tf.errors.OutOfRange” 
+解决方案：
+while True： ##循环出队（读取数据）
+  try:
+      print(sess.run(q.dequeue()))
+  except tf.errors.OutOfRangeError:
+      break  ##当数据读完，退出循环
