@@ -1,0 +1,6 @@
+tf.train.string_input_producer breaks when num_epochs is set
+会报错：FailedPreconditionError: Attempting to use uninitialized value input_producer/limit_epochs/epochs
+
+解决方法：
+sess.run(tf.initialize_local_variables())
+因为local_variable can't be initialized by tf.initialize_all_variables()
