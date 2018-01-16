@@ -6,4 +6,87 @@ https://github.com/parahaoer/deep-learning/blob/master/tensorflow%20%E8%AF%BB%E5
 链接：https://github.com/ycszen/TensorFlowLaboratory/blob/master/reading_data/read_data_time_test.py 这个代码能成功将RGB图片转化成tfrecord文件，并
 从中读取出来。 这段代码讲了两种方式读取图片。1、从指定文件夹读取图片；2、从tfrecord文件中读取图片。在main函数中，（注意）调用了两种实现方式，只是注释了其中一种。
 这个仓库的另一个数据读取代码example_tfrecords.py。需要指定图片文件夹的路径，num_classes是图片文件夹列表。另外，在读取tfrecord的时候，需要加上Coordinator
-和异常处理机制。
+和异常处理机制。修改后代码：
+import os
+import tensorflow as tf
+from PIL import Image
+import pickle
+
+cwd = os.getcwd()
+
+def create_record():
+    '''
+    此处我加载的数据目录如下：
+    0 -- img1.jpg
+         img2.jpg
+         img3.jpg
+         ...
+    1 -- img1.jpg
+         img2.jpg
+         ...
+    2 -- ...
+    ...
+    '''
+    file_location = '../../train_dir/'
+    num_classes = os.listdir(file_location)      
+    
+    writer = tf.python_io.TFRecordWriter("train.tfrecords")
+    for index, name in enumerate(num_classes):
+        class_path = file_location + name + "/"
+        print(class_path)
+        for img_name in os.listdir(class_path):
+            img_path = class_path + img_name
+            img = Image.open(img_path)
+            img = img.resize((32, 32))
+            img_raw = img.tobytes() #将图片转化为原生bytes
+            example = tf.train.Example(features=tf.train.Features(feature={
+                "label": tf.train.Feature(int64_list=tf.train.Int64List(value=[index])),
+                'img_raw': tf.train.Feature(bytes_list=tf.train.BytesList(value=[img_raw]))
+            }))
+            writer.write(example.SerializeToString())
+    writer.close()
+
+def read_and_decode(filename):
+    filename_queue = tf.train.string_input_producer([filename])
+
+    reader = tf.TFRecordReader()
+    _, serialized_example = reader.read(filename_queue)
+    features = tf.parse_single_example(serialized_example,
+                                       features={
+                                           'label': tf.FixedLenFeature([], tf.int64),
+                                           'img_raw' : tf.FixedLenFeature([], tf.string),
+                                       })
+
+    img = tf.decode_raw(features['img_raw'], tf.uint8)
+    print(img.shape)
+    img = tf.reshape(img, [32, 32, 3])
+    img = tf.cast(img, tf.float32) * (1. / 255) - 0.5
+    label = tf.cast(features['label'], tf.int32)
+
+    return img, label
+
+if __name__ == '__main__':
+    #create_record()
+    img, label = read_and_decode("train.tfrecords")
+
+    img_batch, label_batch = tf.train.shuffle_batch([img, label],
+                                                    batch_size=30, capacity=2000,
+                                                    min_after_dequeue=1000)
+    #初始化所有的op
+    init = tf.initialize_all_variables()
+
+    with tf.Session() as sess:
+        sess.run(init)
+        coord = tf.train.Coordinator()
+	    #启动队列
+        threads = tf.train.start_queue_runners(sess=sess, coord = coord)
+        for i in range(3):
+            try:
+                val, l= sess.run([img_batch, label_batch])
+                #l = to_categorical(l, 12)
+                print(val.shape, l)
+            except Exception as e:
+                coord.request_stop()
+                break
+        coord.request_stop()
+        coord.join(threads)
