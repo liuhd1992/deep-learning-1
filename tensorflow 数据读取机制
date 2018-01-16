@@ -5,3 +5,5 @@ https://github.com/parahaoer/deep-learning/blob/master/tensorflow%20%E8%AF%BB%E5
 链接：http://blog.csdn.net/shenxiaolu1984/article/details/53024513  ，代码有很多bug，但是道理讲得很清楚（可能是从哪里翻译过来的，自己没用动手做）
 链接：https://github.com/ycszen/TensorFlowLaboratory/blob/master/reading_data/read_data_time_test.py 这个代码能成功将RGB图片转化成tfrecord文件，并
 从中读取出来。 这段代码讲了两种方式读取图片。1、从指定文件夹读取图片；2、从tfrecord文件中读取图片。在main函数中，（注意）调用了两种实现方式，只是注释了其中一种。
+这个仓库的另一个数据读取代码example_tfrecords.py。需要指定图片文件夹的路径，num_classes是图片文件夹列表。另外，在读取tfrecord的时候，需要加上Coordinator
+和异常处理机制。
