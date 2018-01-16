@@ -4,4 +4,4 @@ https://zhuanlan.zhihu.com/p/27238630
 https://github.com/parahaoer/deep-learning/blob/master/tensorflow%20%E8%AF%BB%E5%8F%96%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E6%96%87%E4%BB%B6
 链接：http://blog.csdn.net/shenxiaolu1984/article/details/53024513  ，代码有很多bug，但是道理讲得很清楚（可能是从哪里翻译过来的，自己没用动手做）
 链接：https://github.com/ycszen/TensorFlowLaboratory/blob/master/reading_data/read_data_time_test.py 这个代码能成功将RGB图片转化成RGB文件，并
-从中读取出来。
+从中读取出来。 这段代码讲了两种方式读取图片。1、从指定文件夹读取图片；2、从tfrecord文件中读取图片。在main函数中，调用了两种实现方式，只是注释了其中一种。
