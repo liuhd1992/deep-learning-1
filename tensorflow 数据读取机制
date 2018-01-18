@@ -38,6 +38,7 @@ def create_record():
     for index, name in enumerate(num_classes):
         class_path = file_location + name + "/"
         print(class_path)
+	#每内循环一次就是将一个图片样本（及其标签）写入tfrecord文件
         for img_name in os.listdir(class_path):
             img_path = class_path + img_name
             img = Image.open(img_path)
