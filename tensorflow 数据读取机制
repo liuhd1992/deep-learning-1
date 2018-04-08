@@ -72,7 +72,8 @@ def read_and_decode(filename):
     return img, label
 
 if __name__ == '__main__':
-    #create_record()
+    if not os.path.exists("train.tfrecords"):
+        create_record()
     img, label = read_and_decode("train.tfrecords")
     #capacity参数指定数据队列一次性能放多少个样本，num_threads参数指定可以开启几个线程来向数据队列中填充数据
     #值得注意的是，capacity>=min_after_dequeue+num_threads*batch_size
