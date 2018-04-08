@@ -14,6 +14,7 @@ https://github.com/parahaoer/deep-learning/blob/master/tensorflow%20%E8%AF%BB%E5
 import os
 import tensorflow as tf
 from PIL import Image
+import matplotlib.pyplot as plt
 import pickle
 
 cwd = os.getcwd()
@@ -91,6 +92,7 @@ if __name__ == '__main__':
                 val, l= sess.run([img_batch, label_batch])
                 #l = to_categorical(l, 12)
                 print(val.shape, l)
+		plt.imshow(val[0])
             except Exception as e:
                 coord.request_stop()
                 break
